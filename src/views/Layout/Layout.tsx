@@ -16,7 +16,7 @@ export const Layout: FunctionComponent = ({ children }) => {
     return (
         <StyledContainer>
             <StyledSearchContainer>
-                <StyledInput onKeyDown={handleKeyEnterDown} value={searchBox.search} onChange={
+                <StyledInput aria-label="search" onKeyDown={handleKeyEnterDown} value={searchBox.search} onChange={
                     (e: React.ChangeEvent<HTMLInputElement>) => searchBox.setSearch(e.target.value)
                 }></StyledInput>
                 <IconButton onClick={fetchMovies}><SearchIcon /></IconButton>
