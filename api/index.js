@@ -30,7 +30,6 @@ const UseDataServer = () => {
 
         if(search) {
           const regex = new RegExp(search)
-          console.log(regex, data.movies)
           data.movies = data.movies.filter(movie => movie.title.match(regex))
         }
 

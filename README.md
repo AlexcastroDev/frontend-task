@@ -4,7 +4,10 @@
 
 This project is a Movie Catalog Explorer 🎬 :)
 
+## Preview
 
+
+![](./screenshots/preview.jpeg)
 
 ## How to
 
