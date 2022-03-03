@@ -1,15 +1,21 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 import { useQuery } from 'react-query'
 import { createContext, useContextSelector } from 'use-context-selector'
 import useMovies from '../hooks/useMovies'
 import { IAppContext } from '../interfaces/AppProvider.interface'
+import { IgetMoviesResponse, IPagination } from '../interfaces/useMovies.interface'
 
 export const AppContext = createContext<IAppContext>({} as IAppContext)
 
 export const AppProvider: FunctionComponent = ({ children }) => {
+  const [searchController, setSearchController] = useState("")
+  const [pagination, setPagination] = useState({} as IPagination)
    const movies = useMovies()
-    const { isLoading: moviesIsLoading, data: moviesData } = useQuery('movies', () => {
-      return movies.getMovies({ perPage: 8 })
+
+    const { isRefetching: moviesIsRefetching, isLoading: moviesIsLoading, data: moviesData, refetch: fetchMovies } = useQuery('movies', async () => {
+      const response: IgetMoviesResponse = await movies.getMovies({ perPage: 8, search: searchController })
+      setPagination(response.pagination)
+      return response.movies
     },
     {
       refetchOnWindowFocus: false
@@ -21,7 +27,13 @@ export const AppProvider: FunctionComponent = ({ children }) => {
       value={{
         movies: {
           data: moviesData || [],
-          isLoading: moviesIsLoading, 
+          isLoading: moviesIsLoading || moviesIsRefetching,
+          fetchMovies,
+          pagination
+        },
+        searchBox: {
+          search: searchController,
+          setSearch: setSearchController
         }
       }}
     >
@@ -32,6 +44,7 @@ export const AppProvider: FunctionComponent = ({ children }) => {
 
 export const useAppContext = (): IAppContext => {
   const movies = useContextSelector(AppContext, (state) => state.movies)
+  const searchBox = useContextSelector(AppContext, (state) => state.searchBox)
 
-  return { movies }
+  return { movies, searchBox }
 }

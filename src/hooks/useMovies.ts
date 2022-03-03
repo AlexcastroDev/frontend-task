@@ -5,7 +5,7 @@ const useMovies = (): IUseMovies => {
     return {
         getMovies: async (params: IMoviesParams) => {
             const request = await api.get("/movies", { params })
-            return await request.data.movies
+            return await request.data
         }
     }
 }

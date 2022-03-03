@@ -1,12 +1,25 @@
 import { FunctionComponent } from "react"
-import { Textfield } from "../../components/Textfield"
-import { StyledContainer, StyledSearchContainer } from "./Layout.styles"
+import { StyledContainer, StyledInput, StyledSearchContainer } from "./Layout.styles"
+import SearchIcon from "../../assets/icons/search.svg";
+import IconButton from '@mui/material/IconButton';
+import { useAppContext } from "../../contexts/AppProvider";
 
 export const Layout: FunctionComponent = ({ children }) => {
+    const { searchBox, movies: { fetchMovies } } = useAppContext()
+
+    const handleKeyEnterDown = (e: React.KeyboardEvent): void => {
+        if (e.key === 'Enter') {
+          fetchMovies()
+        }
+    }
+
     return (
         <StyledContainer>
             <StyledSearchContainer>
-                <Textfield></Textfield>
+                <StyledInput onKeyDown={handleKeyEnterDown} value={searchBox.search} onChange={
+                    (e: React.ChangeEvent<HTMLInputElement>) => searchBox.setSearch(e.target.value)
+                }></StyledInput>
+                <IconButton onClick={fetchMovies}><SearchIcon /></IconButton>
             </StyledSearchContainer>
             { children }
         </StyledContainer>
