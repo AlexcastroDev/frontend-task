@@ -1,12 +1,13 @@
 import { makeServer } from "../api"
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from '@mui/material/styles';
+
 import { theme } from './theme';
 import { Layout } from './views/Layout';
-import "./styles/main.css"
-import { Movies } from './views/Movies';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AppProvider } from './contexts/AppProvider';
 import { FunctionComponent } from "react";
+import { Home } from "./views/Home";
+import "./styles/main.css"
 
 const queryClient = new QueryClient()
 
@@ -18,11 +19,11 @@ export const App: FunctionComponent = () => {
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-          <Layout>
-              <AppProvider>
-                <Movies></Movies>
-              </AppProvider>
-          </Layout>
+        <AppProvider>
+            <Layout>
+                <Home></Home>
+            </Layout>
+          </AppProvider>
       </QueryClientProvider>
     </ThemeProvider>
   )

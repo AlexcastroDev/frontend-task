@@ -20,6 +20,10 @@ const config: Configuration = {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.svg$/,
+        use: ["@svgr/webpack"],
+      },
+      {
         test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
         use: {

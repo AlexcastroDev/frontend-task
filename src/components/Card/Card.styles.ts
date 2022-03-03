@@ -3,14 +3,18 @@ import styled from "styled-components";
 
 type ISection = Pick<ICard, "cover">
 
-export const StyledCard = styled.section<ISection>`
-    background: white;
-    background: url(${({ cover }) => cover}) center;
+
+export const BaseCard = styled.section`
     width: 20%;
     height: 40.3rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+`
+
+export const StyledCard = styled(BaseCard)<ISection>`
+    background: white;
+    background: url(${({ cover }) => cover}) center;
 `
 
 export const Title = styled.h1`
