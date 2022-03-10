@@ -1,5 +1,5 @@
-import { api } from '../services/api';
-import { IUseMovies, IMoviesParams } from './../interfaces/useMovies.interface';
+import { IUseMovies, IMoviesParams } from './../../interfaces/useMovies.interface';
+import { api } from '../api';
 
 const useMovies = (): IUseMovies => {
     return {

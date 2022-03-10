@@ -1,7 +1,7 @@
+import useMovies from '@root/services/movies/useMovies'
 import React, { FunctionComponent, useState } from 'react'
 import { useQuery } from 'react-query'
 import { createContext, useContextSelector } from 'use-context-selector'
-import useMovies from '../hooks/useMovies'
 import { IAppContext } from '../interfaces/AppProvider.interface'
 import { IgetMoviesResponse, IPagination } from '../interfaces/useMovies.interface'
 
